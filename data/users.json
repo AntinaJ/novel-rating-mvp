@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "username": "demo",
+    "passwordHash": "8d969eef6ecad3c29a3a629280e686cff8fabd8f61e6d8fda3f4f9b733f4f6d6",
+    "createdAt": "2026-03-20T10:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "username": "001",
+    "passwordHash": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "createdAt": "2026-03-23T03:00:43.219Z"
+  }
+]

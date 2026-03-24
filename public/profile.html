@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>个人中心 - 网文评分站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800">
+    <header class="border-b bg-white">
+      <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+        <a href="/" class="text-xl font-bold text-indigo-900">网文评分站</a>
+        <div class="ml-auto" id="authArea"></div>
+      </div>
+    </header>
+    <main class="mx-auto max-w-6xl space-y-4 px-4 py-6">
+      <h1 class="text-2xl font-semibold">个人中心</h1>
+      <section class="rounded-xl border bg-white p-4">
+        <h2 class="mb-2 text-lg font-semibold">我读过的书</h2>
+        <div id="readBooks"></div>
+      </section>
+      <section class="rounded-xl border bg-white p-4">
+        <h2 class="mb-2 text-lg font-semibold">我的评分历史</h2>
+        <div id="ratingHistory"></div>
+      </section>
+      <section class="rounded-xl border bg-white p-4">
+        <h2 class="mb-2 text-lg font-semibold">我的评论</h2>
+        <div id="myComments"></div>
+      </section>
+    </main>
+    <script src="/shared.js"></script>
+    <script src="/profile.js"></script>
+  </body>
+</html>

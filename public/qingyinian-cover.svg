@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600" role="img" aria-label="�Ytb">
+  <defs>
+    <linearGradient id="a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#a)"/>
+  <rect x="24" y="24" width="352" height="552" rx="18" fill="none" stroke="#94a3b8" stroke-opacity="0.5"/>
+  <text x="200" y="250" text-anchor="middle" font-size="52" fill="#f8fafc" font-family="Arial, sans-serif">�Yt</text>
+  <text x="200" y="300" text-anchor="middle" font-size="22" fill="#cbd5e1" font-family="Arial, sans-serif">+{ W</text>
+  <text x="200" y="520" text-anchor="middle" font-size="16" fill="#94a3b8" font-family="Arial, sans-serif">Q���</text>
+</svg>

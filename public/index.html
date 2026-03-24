@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>网文评分站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#eef2ff",
+                100: "#e0e7ff",
+                600: "#4f46e5",
+                700: "#4338ca",
+                900: "#1e1b4b"
+              }
+            }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800">
+    <header class="sticky top-0 z-10 border-b border-slate-200 bg-white/90 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+        <a href="/" class="text-xl font-bold text-brand-900">网文评分站</a>
+        <div class="flex-1">
+          <form id="searchForm" class="flex gap-2">
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="搜索书名 / 作者"
+              class="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none ring-brand-600 focus:ring-2"
+            />
+            <button class="rounded-lg bg-brand-700 px-4 py-2 text-white hover:bg-brand-600">搜索</button>
+          </form>
+        </div>
+        <div id="authArea" class="flex items-center gap-2"></div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-6">
+      <div class="mb-4 flex items-center justify-between gap-3">
+        <h1 class="text-2xl font-semibold text-slate-900">热门网文</h1>
+        <button id="openSubmitBookModalBtn" class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-500">
+          添加新书
+        </button>
+      </div>
+      <section class="mb-4 grid grid-cols-1 gap-3 rounded-xl border border-slate-200 bg-white p-4 md:grid-cols-3">
+        <select id="platformFilter" class="input-base">
+          <option value="">全部平台</option>
+          <option value="起点">起点</option>
+          <option value="晋江">晋江</option>
+          <option value="番茄">番茄</option>
+          <option value="长佩">长佩</option>
+        </select>
+        <select id="genreFilter" class="input-base">
+          <option value="">全部题材</option>
+          <option value="玄幻">玄幻</option>
+          <option value="言情">言情</option>
+          <option value="悬疑">悬疑</option>
+          <option value="科幻">科幻</option>
+          <option value="未分类">未分类</option>
+        </select>
+        <button id="applyFilterBtn" class="rounded-lg bg-brand-700 px-4 py-2 text-white hover:bg-brand-600">应用筛选</button>
+      </section>
+      <p id="resultHint" class="mb-4 text-sm text-slate-500"></p>
+      <section id="bookGrid" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"></section>
+      <div class="mt-5 flex justify-center">
+        <button id="loadMoreBtn" class="hidden rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm hover:bg-slate-100">
+          加载更多
+        </button>
+      </div>
+    </main>
+
+    <div id="submitBookModal" class="fixed inset-0 z-20 hidden items-center justify-center bg-black/40 p-4">
+      <div class="w-full max-w-2xl rounded-xl bg-white p-5 shadow-xl">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-xl font-semibold">添加新书（提交审核）</h2>
+          <button id="closeSubmitBookModalBtn" class="text-slate-400 hover:text-slate-700">✕</button>
+        </div>
+        <form id="submitBookForm" class="grid grid-cols-1 gap-3 md:grid-cols-2">
+          <input id="submitTitle" class="input-base" placeholder="书名（必填）" required />
+          <input id="submitAuthor" class="input-base" placeholder="作者（必填）" required />
+          <select id="submitPlatform" class="input-base md:col-span-2" required>
+            <option value="">选择平台来源</option>
+            <option value="起点">起点（橙）</option>
+            <option value="晋江">晋江（绿）</option>
+            <option value="长佩">长佩（紫）</option>
+            <option value="番茄">番茄（红）</option>
+            <option value="其他">其他（灰）</option>
+          </select>
+          <div id="platformPreview" class="md:col-span-2 text-sm text-slate-500">平台标识：未选择</div>
+          <input id="submitCoverUrl" class="input-base md:col-span-2" placeholder="封面图片链接（选填，可粘贴URL）" />
+          <input id="submitNickname" class="input-base md:col-span-2" placeholder="提交人昵称（选填）" />
+          <textarea id="submitDescription" class="input-base md:col-span-2 min-h-28" placeholder="作品简介"></textarea>
+          <button class="rounded-lg bg-brand-700 px-4 py-2 text-white hover:bg-brand-600 md:col-span-2">提交审核</button>
+        </form>
+        <p id="submitBookMsg" class="mt-3 text-sm"></p>
+      </div>
+    </div>
+
+    <div id="authModal" class="fixed inset-0 hidden items-center justify-center bg-black/40 p-4">
+      <div class="w-full max-w-md rounded-xl bg-white p-5 shadow-xl">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 id="authTitle" class="text-xl font-semibold">登录</h2>
+          <button id="closeAuthModal" class="text-slate-400 hover:text-slate-700">✕</button>
+        </div>
+        <form id="authForm" class="space-y-3">
+          <input id="authUsername" type="text" placeholder="用户名" class="input-base" required />
+          <input id="authPassword" type="password" placeholder="密码（至少6位）" class="input-base" required />
+          <button id="authSubmitBtn" class="w-full rounded-lg bg-brand-700 px-4 py-2 text-white hover:bg-brand-600">
+            登录
+          </button>
+        </form>
+        <p id="authMessage" class="mt-3 text-sm text-red-500"></p>
+        <button id="switchAuthModeBtn" class="mt-2 text-sm text-brand-700 hover:underline">没有账号？去注册</button>
+      </div>
+    </div>
+
+    <script src="/shared.js"></script>
+    <script src="/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>书籍详情 - 网文评分站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: "#eef2ff",
+                100: "#e0e7ff",
+                600: "#4f46e5",
+                700: "#4338ca",
+                900: "#1e1b4b"
+              }
+            }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800">
+    <header class="sticky top-0 z-10 border-b border-slate-200 bg-white/90 backdrop-blur">
+      <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+        <a href="/" class="text-xl font-bold text-brand-900">网文评分站</a>
+        <div class="ml-auto flex items-center gap-2">
+          <a href="/" class="rounded-lg border border-slate-200 px-3 py-2 text-sm hover:bg-slate-100">返回首页</a>
+          <div id="authArea" class="flex items-center gap-2"></div>
+        </div>
+      </div>
+    </header>
+
+    <main id="detailRoot" class="mx-auto max-w-6xl px-4 py-6"></main>
+
+    <div id="authModal" class="fixed inset-0 hidden items-center justify-center bg-black/40 p-4">
+      <div class="w-full max-w-md rounded-xl bg-white p-5 shadow-xl">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 id="authTitle" class="text-xl font-semibold">登录</h2>
+          <button id="closeAuthModal" class="text-slate-400 hover:text-slate-700">✕</button>
+        </div>
+        <form id="authForm" class="space-y-3">
+          <input id="authUsername" type="text" placeholder="用户名" class="input-base" required />
+          <input id="authPassword" type="password" placeholder="密码（至少6位）" class="input-base" required />
+          <button id="authSubmitBtn" class="w-full rounded-lg bg-brand-700 px-4 py-2 text-white hover:bg-brand-600">
+            登录
+          </button>
+        </form>
+        <p id="authMessage" class="mt-3 text-sm text-red-500"></p>
+        <button id="switchAuthModeBtn" class="mt-2 text-sm text-brand-700 hover:underline">没有账号？去注册</button>
+      </div>
+    </div>
+
+    <script src="/shared.js"></script>
+    <script src="/detail.js"></script>
+  </body>
+</html>

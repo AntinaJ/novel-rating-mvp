@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "诡秘之主",
+    "author": "爱潜水的乌贼",
+    "platform": "起点",
+    "coverUrl": "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80",
+    "description": "蒸汽与机械并存的世界，少年在命运洪流中追寻真相。"
+  },
+  {
+    "id": 2,
+    "title": "将进酒",
+    "author": "唐酒卿",
+    "platform": "晋江",
+    "coverUrl": "https://images.unsplash.com/photo-1495640388908-05fa85288e61?auto=format&fit=crop&w=400&q=80",
+    "description": "乱世风云中，权谋与情感交织，少年将军一步步走向巅峰。"
+  },
+  {
+    "id": 3,
+    "title": "我在废土世界扫垃圾",
+    "author": "有花在野",
+    "platform": "番茄",
+    "coverUrl": "https://images.unsplash.com/photo-1524578271613-d550eacf6090?auto=format&fit=crop&w=400&q=80",
+    "description": "灾变之后的废土世界，普通人也能在微光中寻找意义。"
+  },
+  {
+    "id": 4,
+    "title": "庆余年",
+    "author": "猫腻",
+    "platform": "起点",
+    "coverUrl": "https://images.unsplash.com/photo-1455885666463-9c922f03f9b7?auto=format&fit=crop&w=400&q=80",
+    "description": "少年身世神秘，在庙堂与江湖之间书写传奇。"
+  },
+  {
+    "id": 5,
+    "title": "天官赐福",
+    "author": "墨香铜臭",
+    "platform": "晋江",
+    "coverUrl": "https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=400&q=80",
+    "description": "神官与鬼王历经千年纠葛，守护心中最珍贵之人。"
+  }
+]

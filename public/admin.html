@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>管理后台 - 网文评分站</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800">
+    <header class="border-b bg-white">
+      <div class="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+        <a href="/" class="text-xl font-bold text-indigo-900">网文评分站</a>
+        <a href="/" class="ml-auto rounded-lg border border-slate-200 px-3 py-2 text-sm hover:bg-slate-100">返回首页</a>
+      </div>
+    </header>
+    <main class="mx-auto max-w-6xl space-y-4 px-4 py-6">
+      <h1 class="text-2xl font-semibold">管理员后台</h1>
+      <section id="adminLoginCard" class="rounded-xl border bg-white p-4">
+        <h2 class="mb-2 text-lg font-semibold">管理员登录</h2>
+        <form id="adminLoginForm" class="flex flex-col gap-2 md:flex-row">
+          <input id="adminPassword" type="password" class="input-base" placeholder="请输入管理员密码" required />
+          <button class="rounded bg-indigo-700 px-4 py-2 text-white">登录</button>
+        </form>
+        <p id="adminMsg" class="mt-2 text-sm"></p>
+      </section>
+      <section id="pendingBooksCard" class="hidden rounded-xl border bg-white p-4">
+        <div class="mb-3 flex items-center justify-between">
+          <h2 class="text-lg font-semibold">待审核书籍</h2>
+          <button id="refreshPendingBtn" class="rounded border px-3 py-1 text-sm hover:bg-slate-100">刷新</button>
+        </div>
+        <div class="mb-3">
+          <input id="pendingSearchInput" class="input-base" placeholder="搜索书名 / 作者 / 提交人" />
+        </div>
+        <div id="pendingBookList" class="space-y-3"></div>
+      </section>
+    </main>
+    <script src="/admin.js"></script>
+  </body>
+</html>

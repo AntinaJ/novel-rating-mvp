@@ -1,0 +1,5 @@
+node_modules/
+novel-rating.db
+uploads/
+.env
+.DS_Store
