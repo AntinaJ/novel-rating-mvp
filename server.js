@@ -621,6 +621,49 @@ app.post("/api/admin/books/:id/cover", auth, adminOnly, upload.single("cover"), 
   res.json({ coverUrl: `/uploads/${path.basename(req.file.path)}` });
 });
 
+app.get("/api/admin/library-books", adminPanelAuth, (req, res) => {
+  const keyword = String(req.query.q || "").trim();
+  const limit = clamp(Number(req.query.limit) || 20, 1, 100);
+  const where = keyword ? "WHERE title LIKE ? OR author LIKE ?" : "";
+  const rows = keyword
+    ? db.prepare(
+      `SELECT id, title, author, platform, cover_url, cover_image_path, updated_at
+       FROM books ${where}
+       ORDER BY updated_at DESC, id DESC
+       LIMIT ?`
+    ).all(`%${keyword}%`, `%${keyword}%`, limit)
+    : db.prepare(
+      `SELECT id, title, author, platform, cover_url, cover_image_path, updated_at
+       FROM books
+       ORDER BY updated_at DESC, id DESC
+       LIMIT ?`
+    ).all(limit);
+  res.json({
+    data: rows.map((row) => ({
+      id: row.id,
+      title: row.title,
+      author: row.author,
+      platform: row.platform,
+      coverUrl: normalizeCoverUrl(row.title, row.cover_image_path, row.cover_url),
+      hasCustomCover: Boolean(row.cover_image_path),
+      updatedAt: row.updated_at
+    }))
+  });
+});
+
+app.post("/api/admin/library-books/:id/cover", adminPanelAuth, upload.single("cover"), (req, res) => {
+  const id = Number(req.params.id);
+  const book = db.prepare("SELECT id, title, cover_url FROM books WHERE id = ?").get(id);
+  if (!book) return res.status(404).json({ message: "书籍不存在。" });
+  if (!req.file) return res.status(400).json({ message: "缺少文件。" });
+  db.prepare("UPDATE books SET cover_image_path = ?, updated_at = ? WHERE id = ?")
+    .run(req.file.path, nowIso(), id);
+  res.json({
+    message: `《${book.title}》封面已更新。`,
+    coverUrl: `/uploads/${path.basename(req.file.path)}`
+  });
+});
+
 app.get("/api/admin/pending-books", adminPanelAuth, (req, res) => {
   const rows = db
     .prepare("SELECT * FROM books_pending WHERE status = 'pending' ORDER BY id DESC")

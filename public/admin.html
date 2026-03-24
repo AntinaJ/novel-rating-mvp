@@ -34,6 +34,16 @@
         </div>
         <div id="pendingBookList" class="space-y-3"></div>
       </section>
+      <section id="libraryCoverCard" class="hidden rounded-xl border bg-white p-4">
+        <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <h2 class="text-lg font-semibold">书库封面管理</h2>
+          <button id="refreshLibraryBtn" class="rounded border px-3 py-1 text-sm hover:bg-slate-100">刷新书库</button>
+        </div>
+        <div class="mb-3">
+          <input id="librarySearchInput" class="input-base" placeholder="搜索书名 / 作者（例如：庆余年）" />
+        </div>
+        <div id="libraryBookList" class="space-y-3"></div>
+      </section>
     </main>
     <script src="/admin.js"></script>
   </body>

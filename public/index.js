@@ -13,6 +13,9 @@ const submitBookForm = document.getElementById("submitBookForm");
 const submitBookMsg = document.getElementById("submitBookMsg");
 const submitPlatform = document.getElementById("submitPlatform");
 const platformPreview = document.getElementById("platformPreview");
+const submitNicknameInput = document.getElementById("submitNickname");
+const LATEST_PENDING_SUBMISSION_KEY = "novel_rating_latest_pending_submission";
+const QUERY_NICKNAME_KEY = "novel_rating_query_nickname";
 
 setupAuthUI();
 let state = {
@@ -125,6 +128,17 @@ loadMoreBtn.onclick = () => {
 const openSubmitBookModal = () => {
   submitBookMsg.textContent = "";
   submitBookForm.reset();
+  const latestRaw = localStorage.getItem(LATEST_PENDING_SUBMISSION_KEY);
+  const queriedNickname = localStorage.getItem(QUERY_NICKNAME_KEY) || "";
+  let latestNickname = "";
+  if (latestRaw) {
+    try {
+      latestNickname = JSON.parse(latestRaw)?.submitterNickname || "";
+    } catch {
+      latestNickname = "";
+    }
+  }
+  submitNicknameInput.value = queriedNickname || latestNickname;
   renderPlatformPreview();
   submitBookModal.classList.remove("hidden");
   submitBookModal.classList.add("flex");
@@ -135,6 +149,16 @@ const closeSubmitBookModal = () => {
   submitBookModal.classList.add("hidden");
 };
 
+const tryAutoOpenSubmitModal = () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("openSubmit") !== "1") return;
+  openSubmitBookModal();
+  params.delete("openSubmit");
+  const query = params.toString();
+  const nextUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
+  window.history.replaceState({}, "", nextUrl);
+};
+
 openSubmitBookModalBtn.onclick = openSubmitBookModal;
 closeSubmitBookModalBtn.onclick = closeSubmitBookModal;
 submitBookModal.onclick = (e) => {
@@ -142,6 +166,7 @@ submitBookModal.onclick = (e) => {
 };
 
 submitPlatform.onchange = renderPlatformPreview;
+tryAutoOpenSubmitModal();
 
 submitBookForm.onsubmit = async (e) => {
   e.preventDefault();
